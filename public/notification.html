@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  background: transparent;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+  overflow: hidden;
+  user-select: none;
+}
+#container {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
+  padding: 0;
+}
+
+/* ===== Card ===== */
+.notif-card {
+  width: 340px;
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 14px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  animation: slideIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  backdrop-filter: blur(24px);
+  transition: transform 0.2s ease;
+}
+.notif-card:hover {
+  transform: translateX(-2px);
+}
+.notif-card.removing {
+  animation: slideOut 0.3s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(400px) scale(0.9); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes slideOut {
+  from { opacity: 1; transform: translateX(0) scale(1); }
+  to { opacity: 0; transform: translateX(400px) scale(0.85); }
+}
+
+/* ===== Accent bar (left side color stripe) ===== */
+.notif-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 14px 0 0 14px;
+}
+.notif-card.task::before { background: linear-gradient(180deg, #6366F1, #818CF8); }
+.notif-card.schedule::before { background: linear-gradient(180deg, #10B981, #34D399); }
+.notif-card.habit::before { background: linear-gradient(180deg, #F59E0B, #FBBF24); }
+
+/* ===== Header ===== */
+.notif-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px 4px;
+  position: relative;
+}
+.notif-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 15px;
+}
+.notif-card.task .notif-icon { background: linear-gradient(135deg, #EEF2FF, #E0E7FF); }
+.notif-card.schedule .notif-icon { background: linear-gradient(135deg, #ECFDF5, #D1FAE5); }
+.notif-card.habit .notif-icon { background: linear-gradient(135deg, #FFFBEB, #FEF3C7); }
+
+.notif-type {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+.notif-card.task .notif-type { color: #6366F1; }
+.notif-card.schedule .notif-type { color: #10B981; }
+.notif-card.habit .notif-type { color: #F59E0B; }
+
+.notif-app {
+  font-size: 10px;
+  color: #B0B0B0;
+  margin-left: auto;
+  font-weight: 500;
+}
+
+.notif-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  color: #C0C0C0;
+  font-size: 14px;
+  line-height: 1;
+}
+.notif-close:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: #666;
+}
+
+/* ===== Body ===== */
+.notif-body {
+  padding: 2px 16px 12px;
+}
+.notif-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1A1A2E;
+  margin-bottom: 4px;
+  line-height: 1.35;
+  word-break: break-word;
+}
+.notif-content {
+  font-size: 12px;
+  color: #6B7280;
+  line-height: 1.45;
+  margin-bottom: 4px;
+  word-break: break-word;
+}
+.notif-time {
+  font-size: 11px;
+  color: #9CA3AF;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.notif-time::before {
+  content: '';
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #D1D5DB;
+}
+
+/* ===== Footer button ===== */
+.notif-footer {
+  padding: 0 16px 12px;
+}
+.notif-btn {
+  width: 100%;
+  padding: 7px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.notif-btn:hover { opacity: 0.88; }
+.notif-card.task .notif-btn { background: linear-gradient(135deg, #6366F1, #818CF8); }
+.notif-card.schedule .notif-btn { background: linear-gradient(135deg, #10B981, #34D399); }
+.notif-card.habit .notif-btn { background: linear-gradient(135deg, #F59E0B, #FBBF24); }
+</style>
+</head>
+<body>
+<div id="container"></div>
+<script>
+const { ipcRenderer } = require('electron');
+
+const typeIcons = {
+  task: '\u{1F4CB}',
+  schedule: '\u{1F4C5}',
+  habit: '\u{1F4C8}',
+};
+const typeLabels = {
+  task: '\u5F85\u529E\u63D0\u9192',
+  schedule: '\u65E5\u7A0B\u63D0\u9192',
+  habit: '\u4E60\u60EF\u63D0\u9192',
+};
+
+function formatTime(iso) {
+  if (!iso) return '';
+  var str = String(iso);
+  var tIdx = str.indexOf('T');
+  if (tIdx < 0) return str;
+  var datePart = str.substring(0, tIdx);
+  var timePart = str.substring(tIdx + 1, tIdx + 6);
+  var parts = datePart.split('-');
+  if (parts.length < 3) return str;
+  return parseInt(parts[1], 10) + '/' + parseInt(parts[2], 10) + ' ' + timePart;
+}
+
+function createCard(data) {
+  const container = document.getElementById('container');
+  const card = document.createElement('div');
+  card.className = 'notif-card ' + (data.type || 'task');
+  card.dataset.id = data.id;
+
+  let timeHtml = '';
+  if (data.startTime) timeHtml += '<div class="notif-time">\u5F00\u59CB\uFF1A' + formatTime(data.startTime) + '</div>';
+  if (data.endTime) timeHtml += '<div class="notif-time">\u7ED3\u675F\uFF1A' + formatTime(data.endTime) + '</div>';
+
+  card.innerHTML =
+    '<div class="notif-header">' +
+      '<div class="notif-icon">' + (typeIcons[data.type] || '\u{1F514}') + '</div>' +
+      '<span class="notif-type">' + (typeLabels[data.type] || '\u63D0\u9192') + '</span>' +
+      '<span class="notif-app">PrivaHub</span>' +
+      '<button class="notif-close" onclick="dismissCard(\'' + data.id + '\')">\u00D7</button>' +
+    '</div>' +
+    '<div class="notif-body">' +
+      '<div class="notif-title">' + escapeHtml(data.title || '') + '</div>' +
+      (data.content ? '<div class="notif-content">' + escapeHtml(data.content) + '</div>' : '') +
+      timeHtml +
+    '</div>' +
+    '<div class="notif-footer">' +
+      '<button class="notif-btn" onclick="dismissCard(\'' + data.id + '\')">\u786E\u5B9A</button>' +
+    '</div>';
+
+  container.appendChild(card);
+
+  setTimeout(adjustWindow, 50);
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function dismissCard(id) {
+  const card = document.querySelector('.notif-card[data-id="' + id + '"]');
+  if (!card || card.classList.contains('removing')) return;
+  card.classList.add('removing');
+  setTimeout(() => {
+    card.remove();
+    adjustWindow();
+    ipcRenderer.send('notification:dismissed', { id });
+  }, 300);
+}
+
+function adjustWindow() {
+  const container = document.getElementById('container');
+  const height = container.offsetHeight;
+  ipcRenderer.send('notification:resize', { height: Math.max(height + 8, 10) });
+}
+
+window.dismissCard = dismissCard;
+
+ipcRenderer.on('notification:show', (_event, data) => {
+  createCard(data);
+});
+</script>
+</body>
+</html>

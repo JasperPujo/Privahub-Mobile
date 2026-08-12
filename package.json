@@ -1,0 +1,37 @@
+{
+  "name": "privahub-web",
+  "version": "2.3.0",
+  "description": "PrivaHub - PWA 移动端版本",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.1.0",
+    "@dnd-kit/sortable": "^8.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@supabase/supabase-js": "^2.43.0",
+    "date-fns": "^3.6.0",
+    "echarts": "^5.5.0",
+    "echarts-for-react": "^3.0.2",
+    "framer-motion": "^11.1.0",
+    "html2canvas": "^1.4.1",
+    "react": "^18.3.1",
+    "react-calendar": "^5.0.0",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.23.1",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "@types/react": "^18.3.2",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.5",
+    "vite": "^6.1.6"
+  }
+}
