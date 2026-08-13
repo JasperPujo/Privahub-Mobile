@@ -30,7 +30,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, footer,
         className={`relative bg-[var(--bg-primary)] rounded-t-2xl md:rounded-card shadow-xl ${sizeClasses[size]} w-full max-h-[85vh] flex flex-col`}
         style={{
           paddingBottom: 'env(safe-area-inset-bottom, 0px)',
-          marginBottom: 'env(safe-area-inset-bottom, 0px)',
         }}
         onClick={(e) => e.stopPropagation()}
       >
