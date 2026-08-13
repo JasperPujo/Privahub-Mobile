@@ -244,7 +244,7 @@ const MobileLayout: React.FC<LayoutProps> = ({ children, className }) => {
         className="flex-1 overflow-hidden flex flex-col relative"
         style={{
           paddingTop: 'calc(56px + env(safe-area-inset-top, 0px))',
-          paddingBottom: 'calc(54px + min(env(safe-area-inset-bottom, 0px), 8px))',
+          paddingBottom: '50px',
         }}
       >
         <div className="flex-1 overflow-auto bg-[var(--bg-primary)] flex flex-col">
@@ -257,8 +257,8 @@ const MobileLayout: React.FC<LayoutProps> = ({ children, className }) => {
       <nav
         className="fixed bottom-0 left-0 right-0 z-30 grid grid-cols-5 border-t border-[var(--border-color)] bg-[var(--bg-secondary)]"
         style={{
-          paddingBottom: 'min(env(safe-area-inset-bottom, 0px), 8px)',
-          height: 'calc(54px + min(env(safe-area-inset-bottom, 0px), 8px))',
+          paddingBottom: '0px',
+          height: '50px',
         }}
       >
         {navItems.map((tab) => {
@@ -269,7 +269,7 @@ const MobileLayout: React.FC<LayoutProps> = ({ children, className }) => {
             <button
               key={tab.id}
               onClick={() => navigate(tab.path)}
-              className="flex flex-col items-center justify-center gap-0.5 h-[54px] relative"
+              className="flex flex-col items-center justify-center gap-0.5 h-[50px] relative"
             >
               <div className={isHome ? `w-9 h-9 rounded-2xl flex items-center justify-center shadow-sm ${
                 isActive ? 'bg-primary-600 text-white' : 'bg-primary-600/10 text-primary-600'
@@ -298,7 +298,7 @@ const MobileLayout: React.FC<LayoutProps> = ({ children, className }) => {
         {/* 更多按钮 */}
         <button
           onClick={() => setShowMore(true)}
-          className="flex flex-col items-center justify-center gap-0.5 h-[54px] relative"
+          className="flex flex-col items-center justify-center gap-0.5 h-[50px] relative"
         >
           <div className="relative w-9 h-6 flex items-center justify-center">
             {(isInMore || showMore) && (
