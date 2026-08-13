@@ -1,4 +1,5 @@
 import React from 'react'
+import { createPortal } from 'react-dom'
 import { AlertTriangle } from '@/utils/icons'
 
 interface ConfirmDialogProps {
@@ -30,8 +31,8 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
       ? 'btn-primary bg-warning hover:bg-warning/90'
       : 'btn-primary'
 
-  return (
-    <div className="modal-overlay" onClick={onClose}>
+  return createPortal(
+    <div className="modal-overlay" style={{ zIndex: 200 }} onClick={onClose}>
       <div
         className="modal-content max-w-md w-full"
         onClick={(e) => e.stopPropagation()}
@@ -56,7 +57,8 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 

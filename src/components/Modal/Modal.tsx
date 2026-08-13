@@ -1,4 +1,5 @@
 ﻿import React from 'react'
+import { createPortal } from 'react-dom'
 import { X } from '@/utils/icons'
 
 interface ModalProps {
@@ -19,14 +20,18 @@ const sizeClasses = {
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, footer, size = 'md' }) => {
   if (!isOpen) return null
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center p-0 md:p-4">
+  // 使用 Portal 渲染到 document.body，避免父级 transform 破坏 fixed 定位
+  return createPortal(
+    <div className="fixed inset-0 z-[200] flex items-end md:items-center justify-center p-0 md:p-4">
       {/* 遮罩 - 不响应点击，防止误触关闭导致数据丢失 */}
       <div className="absolute inset-0 bg-black/50" />
       {/* 模态框主体 */}
       <div
         className={`relative bg-[var(--bg-primary)] rounded-t-2xl md:rounded-card shadow-xl ${sizeClasses[size]} w-full max-h-[85vh] flex flex-col`}
-        style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
+        style={{
+          paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+          marginBottom: 'env(safe-area-inset-bottom, 0px)',
+        }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* 移动端拖拽指示条 */}
@@ -54,7 +59,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, footer,
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 

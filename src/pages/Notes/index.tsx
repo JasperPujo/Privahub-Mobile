@@ -940,7 +940,7 @@ const NotesPage: React.FC = () => {
 
       {/* 图片预览 Modal */}
       {previewImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80" onClick={() => setPreviewImage(null)}>
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80" onClick={() => setPreviewImage(null)}>
           <button
             onClick={() => setPreviewImage(null)}
             className="absolute top-4 right-4 p-2.5 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors z-10 flex items-center justify-center"

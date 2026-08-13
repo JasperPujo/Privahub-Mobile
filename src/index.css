@@ -285,15 +285,14 @@
   }
 
   .modal-overlay {
-    @apply fixed inset-0 bg-black/40 backdrop-blur-sm z-50
+    @apply fixed inset-0 bg-black/40 backdrop-blur-sm
            flex items-end md:items-center justify-center p-0 md:p-4;
+    z-index: 200;
   }
 
   .modal-content {
     @apply bg-[var(--bg-secondary)] rounded-t-2xl md:rounded-card shadow-soft-lg w-full max-w-lg
            max-h-[80vh] flex flex-col overflow-hidden;
-    will-change: transform, opacity;
-    backface-visibility: hidden;
   }
 
   .empty-state {

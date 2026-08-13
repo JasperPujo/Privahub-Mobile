@@ -1400,7 +1400,7 @@ const CalendarPage: React.FC = () => {
 
       {/* 排班设置弹窗 */}
       {showShiftModal && (
-        <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center bg-black/40" onClick={() => setShowShiftModal(false)}>
+        <div className="fixed inset-0 z-[200] flex items-end md:items-center justify-center bg-black/40" onClick={() => setShowShiftModal(false)}>
           <div className="bg-[var(--bg-primary)] rounded-t-2xl md:rounded-2xl shadow-xl w-full md:max-w-lg md:mx-4 p-4 md:p-6 max-h-[90vh] md:max-h-[85vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
             {/* 移动端底部弹窗拖拽指示条 */}
             <div className="md:hidden flex justify-center mb-2">

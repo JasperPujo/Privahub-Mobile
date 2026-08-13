@@ -251,8 +251,8 @@ const MobileLayout: React.FC<LayoutProps> = ({ children, className }) => {
       <nav
         className="grid grid-cols-5 flex-shrink-0 border-t border-[var(--border-color)] bg-[var(--bg-secondary)]"
         style={{
-          paddingBottom: 'env(safe-area-inset-bottom, 0px)',
-          height: 'calc(66px + env(safe-area-inset-bottom, 0px))',
+          paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 6px)',
+          height: 'calc(60px + max(env(safe-area-inset-bottom, 0px), 6px))',
         }}
       >
         {navItems.map((tab) => {
@@ -263,11 +263,11 @@ const MobileLayout: React.FC<LayoutProps> = ({ children, className }) => {
             <button
               key={tab.id}
               onClick={() => navigate(tab.path)}
-              className="flex flex-col items-center justify-center gap-0.5 h-[66px] relative"
+              className="flex flex-col items-center justify-center gap-0.5 h-[60px] relative"
             >
-              <div className={isHome ? `w-11 h-11 rounded-2xl flex items-center justify-center shadow-sm ${
+              <div className={isHome ? `w-10 h-10 rounded-2xl flex items-center justify-center shadow-sm ${
                 isActive ? 'bg-primary-600 text-white' : 'bg-primary-600/10 text-primary-600'
-              }` : 'relative w-11 h-8 flex items-center justify-center'}>
+              }` : 'relative w-10 h-7 flex items-center justify-center'}>
                 {isActive && !isHome && (
                   <motion.div
                     layoutId="activeTab"
@@ -292,9 +292,9 @@ const MobileLayout: React.FC<LayoutProps> = ({ children, className }) => {
         {/* 更多按钮 */}
         <button
           onClick={() => setShowMore(true)}
-          className="flex flex-col items-center justify-center gap-0.5 h-[66px] relative"
+          className="flex flex-col items-center justify-center gap-0.5 h-[60px] relative"
         >
-          <div className="relative w-11 h-8 flex items-center justify-center">
+          <div className="relative w-10 h-7 flex items-center justify-center">
             {(isInMore || showMore) && (
               <motion.div
                 layoutId="activeTab"
