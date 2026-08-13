@@ -311,7 +311,7 @@ const FocusPage: React.FC = () => {
       const aside = document.querySelector('aside') as HTMLElement | null
       const header = document.querySelector('header') as HTMLElement | null
       const titleBar = document.querySelector('.fixed.top-0') as HTMLElement | null
-      const mainWrap = document.querySelector('.h-screen.w-screen') as HTMLElement | null
+      const mainWrap = document.querySelector('.h-full.w-screen') as HTMLElement | null
       aside && (aside.style.display = '')
       header && (header.style.display = '')
       titleBar && (titleBar.style.display = '')
@@ -338,7 +338,7 @@ const FocusPage: React.FC = () => {
       const aside = document.querySelector('aside') as HTMLElement | null
       const header = document.querySelector('header') as HTMLElement | null
       const titleBar = document.querySelector('.fixed.top-0') as HTMLElement | null
-      const mainWrap = document.querySelector('.h-screen.w-screen') as HTMLElement | null
+      const mainWrap = document.querySelector('.h-full.w-screen') as HTMLElement | null
       if (next) {
         aside && (aside.style.display = 'none')
         header && (header.style.display = 'none')

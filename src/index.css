@@ -100,6 +100,18 @@
     transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  #root {
+    height: 100vh;
+    height: 100dvh;
+  }
+
   body {
     @apply font-sans antialiased;
     background-color: var(--bg-primary);

@@ -256,7 +256,7 @@ const Login: React.FC = () => {
 
   return (
     <div
-      className="h-screen w-screen flex items-center justify-center"
+      className="h-full w-screen flex items-center justify-center"
       style={{
         backgroundImage: `url(${loginBg})`,
         backgroundSize: 'cover',

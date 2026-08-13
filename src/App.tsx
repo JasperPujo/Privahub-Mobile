@@ -237,7 +237,7 @@ function App() {
   // 检查 session 期间显示加载态
   if (checkingSession) {
     return (
-      <div className={`h-screen h-dvh w-screen flex items-center justify-center ${themeClass}`}>
+      <div className={`h-full w-screen flex items-center justify-center ${themeClass}`}>
         <div className="text-center">
           <div className="w-10 h-10 border-4 border-[#6B4C9A] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
           <p className="text-sm text-[var(--text-secondary)]">正在检查登录状态...</p>
@@ -259,7 +259,7 @@ function App() {
   }
 
   return (
-    <div className={`h-screen h-dvh w-screen flex overflow-hidden ${themeClass}`}>
+    <div className={`h-full w-screen flex overflow-hidden ${themeClass}`}>
       <ElectronTitleBar />
       {lockScreen.isLocked && <LockScreen />}
       <Layout className={isElectron ? 'pt-8' : ''}>
