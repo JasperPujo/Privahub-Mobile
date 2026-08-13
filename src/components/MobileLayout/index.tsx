@@ -187,9 +187,9 @@ const MobileLayout: React.FC<LayoutProps> = ({ children, className }) => {
 
   return (
     <div className={`flex flex-col h-full w-full overflow-hidden ${className || ''}`}>
-      {/* ============ 移动端顶栏 ============ */}
+      {/* ============ 移动端顶栏（fixed 固定在顶部） ============ */}
       <header
-        className="flex items-center justify-between px-4 flex-shrink-0 border-b border-[var(--border-color)] bg-[var(--bg-secondary)]"
+        className="fixed top-0 left-0 right-0 z-30 flex items-center justify-between px-4 border-b border-[var(--border-color)] bg-[var(--bg-secondary)]"
         style={{
           paddingTop: 'max(env(safe-area-inset-top, 0px), 0px)',
           height: 'calc(56px + env(safe-area-inset-top, 0px))',
@@ -239,17 +239,23 @@ const MobileLayout: React.FC<LayoutProps> = ({ children, className }) => {
         </div>
       </header>
 
-      {/* ============ 主内容区 ============ */}
-      <main className="flex-1 overflow-hidden flex flex-col relative">
+      {/* ============ 主内容区（padding 避开 fixed 顶栏和底栏） ============ */}
+      <main 
+        className="flex-1 overflow-hidden flex flex-col relative"
+        style={{
+          paddingTop: 'calc(56px + env(safe-area-inset-top, 0px))',
+          paddingBottom: 'calc(60px + max(env(safe-area-inset-bottom, 0px), 6px))',
+        }}
+      >
         <div className="flex-1 overflow-auto bg-[var(--bg-primary)] flex flex-col">
           {children}
         </div>
         <FocusMiniBar />
       </main>
 
-      {/* ============ 底部导航栏 ============ */}
+      {/* ============ 底部导航栏（fixed 固定在底部） ============ */}
       <nav
-        className="grid grid-cols-5 flex-shrink-0 border-t border-[var(--border-color)] bg-[var(--bg-secondary)]"
+        className="fixed bottom-0 left-0 right-0 z-30 grid grid-cols-5 border-t border-[var(--border-color)] bg-[var(--bg-secondary)]"
         style={{
           paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 6px)',
           height: 'calc(60px + max(env(safe-area-inset-bottom, 0px), 6px))',
