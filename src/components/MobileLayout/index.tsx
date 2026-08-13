@@ -244,7 +244,7 @@ const MobileLayout: React.FC<LayoutProps> = ({ children, className }) => {
         className="flex-1 overflow-hidden flex flex-col relative"
         style={{
           paddingTop: 'calc(56px + env(safe-area-inset-top, 0px))',
-          paddingBottom: '50px',
+          paddingBottom: '70px',
         }}
       >
         <div className="flex-1 overflow-auto bg-[var(--bg-primary)] flex flex-col">
@@ -257,8 +257,8 @@ const MobileLayout: React.FC<LayoutProps> = ({ children, className }) => {
       <nav
         className="fixed bottom-0 left-0 right-0 z-30 grid grid-cols-5 border-t border-[var(--border-color)] bg-[var(--bg-secondary)]"
         style={{
-          paddingBottom: '0px',
-          height: '50px',
+          paddingBottom: '20px',
+          height: '70px',
         }}
       >
         {navItems.map((tab) => {
